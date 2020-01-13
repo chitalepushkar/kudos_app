@@ -10,7 +10,7 @@ Ruby(>=2.5.0), MySQL(>=5.5.8 and < 8.0), Yarn
 
 ### Steps
 
-* Refer following guide for installing ruby, mysql and rails: https://gorails.com/setup/osx/10.15-catalina
+* Refer following guide for installing ruby, MySQL and rails: https://gorails.com/setup/osx/10.15-catalina
 
 * Yarn install: https://yarnpkg.com/lang/en/docs/install/#mac-stable
 
@@ -21,9 +21,9 @@ Ruby(>=2.5.0), MySQL(>=5.5.8 and < 8.0), Yarn
 
 * Run following commands:
 
-  * Add bootstrap and related js packages using yarn.
+  * Run yarn command to install necessary js packages.
     ```ruby
-    yarn add bootstrap jquery popper.js # Install bootstrap and related js packages
+    yarn
     ```
 
   * Install ruby gem dependencies.
@@ -33,24 +33,15 @@ Ruby(>=2.5.0), MySQL(>=5.5.8 and < 8.0), Yarn
 
 * MySQL configuration
 
-  * Create mysql user for the app by first opening mysql with root and then adding a new user.
+  * Create MySQL user for the app by first opening MySQL console with root and then adding a new user.
     ```mysql
     mysql -u root -p # Login using root user from console
 
-    mysql> GRANT ALL PRIVILEGES ON *.* TO 'kudos_user'@'localhost' IDENTIFIED BY 'password';
+    mysql> CREATE USER 'kudos_user'@'localhost' IDENTIFIED BY 'password';
+    mysql> GRANT ALL PRIVILEGES ON *.* TO 'kudos_user'@'localhost';
     ```
+    Note: If you want to use an existing MySQL user instead of creating `kudos_user`, you can change credentials to connect the rails app with your MySQL setup by modifying the config/database.yml file.
 
-  * Modify mysql host and port in config/database.yml or keep below mentioned changes if your mysql is running on localhost on port 3306.
-    ```ruby
-    default: &default
-      adapter: mysql2
-      encoding: utf8mb4
-      pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-      username: kudos_user
-      password: password
-      host: localhost
-      port: 3306
-    ```
 * Create database
   ```ruby
   rake db:create
