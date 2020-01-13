@@ -1,0 +1,33 @@
+<div class="card text-center">
+  <div class="card-header">
+    Profile
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Name: <%= full_name(current_user) %></h5>
+    <p class="card-text">Organization: <%= current_user.organization&.name %> </p>
+  </div>
+  <div class="card-footer text-muted">
+    Username: <%= current_user.username %>
+  </div>
+</div>
+
+<h4> Team members </h4>
+<ul class="list-group" data-sender="<%=current_user.id%>" id="kds_list">
+  <% @users.each do |user|%>
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-8">
+          <%= full_name(user) %>
+        </div>
+        <div class="col-4">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Add message" aria-label="Add message" aria-describedby="basic-addon2" id="kds_txt_<%= user.id%>">
+            <div class="input-group-append">
+              <button data-recipient="<%= user.id%>" class="btn btn-success" type="button">Give Kudos</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  <%end%>
+</ul>

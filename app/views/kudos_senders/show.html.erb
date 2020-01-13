@@ -1,0 +1,19 @@
+<h4> Kudos senders </h4>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Sender name</th>
+      <th scope="col">Sender's message</th>
+      <th scope="col">Sent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @kudos_senders.each do |sender|%>
+      <tr>
+        <td><%= full_name(sender) %></td>
+        <td><%= sender.message %></td>
+        <td><%= time_ago_in_words(sender.created_at, include_seconds: true) %> ago</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
